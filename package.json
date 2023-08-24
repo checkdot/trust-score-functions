@@ -1,6 +1,6 @@
 {
   "name": "checkdot-trust-score-functions",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Library project to provide different back-end and front-end parties with the same functions for calculating the scores of different parts of a crypto project.",
   "main": "dist/index.js",
   "scripts": {
