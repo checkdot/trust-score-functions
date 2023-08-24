@@ -12,7 +12,7 @@ const getOperationnalApplicationSecurityCheck = (project: any) => {
         { lbl: 'HTTPS certificate expired', fn: (s: any) => s['SSL']['expired'] == true, status: false, error: project.websiteBroken, description: 'The Virtual Network Computing (VNC) port is open and accessible from the public internet.' },
         { lbl: 'Support Deprecated SSL protocols', fn: (s: any) => s['SSL']['SSLv2'] == 'Enabled' || s['SSL']['SSLv3'] == 'Enabled', status: false, error: project.websiteBroken, description: 'The Virtual Network Computing (VNC) port is open and accessible from the public internet.' },
         { lbl: 'Support Deprecated TLS versions', fn: (s: any) => s['SSL']['TLSv1'] == 'Enabled' || s['SSL']['TLSv11'] == 'Enabled', name: 'VNC', status: false, error: project.websiteBroken, description: 'The Virtual Network Computing (VNC) port is open and accessible from the public internet.' }
-      ], (project: any) => project?.security?.networkSecurity);
+      ], (project: any) => project?.security?.applicationSecurity);
       return checkResult;
 };
 
