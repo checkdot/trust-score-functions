@@ -1,0 +1,28 @@
+{
+  "name": "checkdot-trust-score-functions",
+  "version": "1.0.0",
+  "description": "Library project to provide different back-end and front-end parties with the same functions for calculating the scores of different parts of a crypto project.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "package:release": "rm -rf ./package && mkdir ./package && cp -r ./dist/ ./package/dist && cp README.md package.json ./package",
+    "release": "npm run build && npm run package:release && npm publish ./package --access public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/checkdot/trust-score-functions.git"
+  },
+  "author": "Jeremy Guyet",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/checkdot/trust-score-functions/issues"
+  },
+  "homepage": "https://github.com/checkdot/trust-score-functions#readme",
+  "dependencies": {
+    "moment": "^2.29.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.4",
+    "typescript": "^5.2.2"
+  }
+}
