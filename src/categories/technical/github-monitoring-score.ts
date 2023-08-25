@@ -11,7 +11,7 @@ const getProjectGithubLastSevenDaysChecks = (project: any) => {
     if (github365 == undefined || Object.keys(github365).length < 1) {
         return [];
     }
-    const lastsSevenDaysKeys = Object.keys(github365).slice(1).slice(-7);
+    const lastsSevenDaysKeys = Object.keys(github365).slice(0).slice(-7);
     const lastsSevenDays = lastsSevenDaysKeys.map(x => github365[x]);
 
     return lastsSevenDays;
