@@ -11,7 +11,7 @@ const getProjectTelegramLastSevenDaysChecks = (project: any) => {
     if (telegram365 == undefined || Object.keys(telegram365).length < 1) {
         return [];
     }
-    const lastsSevenDaysKeys = Object.keys(telegram365).slice(1).slice(-7);
+    const lastsSevenDaysKeys = Object.keys(telegram365).slice(0).slice(-7);
     const lastsSevenDays = lastsSevenDaysKeys.map(x => telegram365[x]);
 
     return lastsSevenDays;

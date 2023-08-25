@@ -12,7 +12,7 @@ const getProjectTwitterLastSevenDayChecks = (project: any) => {
     if (twitter365 == undefined || Object.keys(twitter365).length < 1) {
         return [];
     }
-    const lastsSevenDaysKeys = Object.keys(twitter365).slice(1).slice(-7);
+    const lastsSevenDaysKeys = Object.keys(twitter365).slice(0).slice(-7);
     const lastsSevenDays = lastsSevenDaysKeys.map((x: any) => twitter365[x]);
     return lastsSevenDays;
 }

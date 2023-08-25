@@ -1,5 +1,27 @@
 import moment from "moment";
 
+const getProjectGithubLastSevenDaysChecks = (project: any) => {
+    if (project.github365 == undefined || project.github365.exists != true) {
+        return [];
+    }
+    const github365 = Object.entries(project.github365 ? project.github365 : {})
+        .filter(x => ['exists', 'avatar', 'first_repo_at'].includes(x[0]) == false)
+        .reduce((acc: any, entry) => { acc[entry[0]] = entry[1]; return acc; }, {});
+
+    if (github365 == undefined || Object.keys(github365).length < 1) {
+        return [];
+    }
+    const lastsSevenDaysKeys = Object.keys(github365).slice(1).slice(-7);
+    const lastsSevenDays = lastsSevenDaysKeys.map(x => github365[x]);
+
+    return lastsSevenDays;
+};
+
+const getProjectGithubLastCheck = (project: any) => {
+    const lastsSevenDays = getProjectGithubLastSevenDaysChecks(project);
+    return lastsSevenDays.length > 0 ? lastsSevenDays[lastsSevenDays.length - 1] : undefined;
+}
+
 const getGithubStarsCountScore = (project: any, dayId: any) => {
     const MAX_STARS = 100;
     return (project.github365[dayId].stars_count <= MAX_STARS ? (project.github365[dayId].stars_count / MAX_STARS) * 100 : 100);
@@ -42,5 +64,8 @@ export {
     getTechnicalGithubMonitoringScore,
     getGithubStarsCountScore,
     getGithubAccountAgeScore,
-    getGithubRepoCountScore
+    getGithubRepoCountScore,
+
+    getProjectGithubLastSevenDaysChecks,
+    getProjectGithubLastCheck
 };
