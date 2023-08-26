@@ -8,6 +8,10 @@ const calculateActivityScore = (followerCounts: any, sensitivity = 20) => {
     }, 0);
     // Calculer la moyenne des différences
     const averageDifference = totalDifference / (followerCounts.length - 1);
+    // totaly stable
+    if (averageDifference == 0) {
+        return 50;
+    }
     // Normaliser la moyenne des différences dans la plage -100 à 100
     const normalizedDifference = ((averageDifference * sensitivity) / Math.max(...followerCounts)) * 100;
     // Calculer le score d'activité en combinant la tendance
@@ -19,6 +23,21 @@ const calculateActivityScore = (followerCounts: any, sensitivity = 20) => {
     return roundedScore;
 };
 
+const calculateStabilityDeviationAndAverage = (priceList: any[]) => {
+    const averagePrice = priceList.reduce((sum, price) => sum + price, 0) / priceList.length;
+    const squaredDifferences = priceList.map(price => Math.pow(price - averagePrice, 2));
+    const variance = squaredDifferences.reduce((sum, squaredDiff) => sum + squaredDiff, 0) / priceList.length;
+    const standardDeviation = Math.sqrt(variance);
+    const percentageOfDeviation = standardDeviation * 100 / averagePrice;
+
+    return {
+        averagePrice,
+        standardDeviation,
+        percentageOfDeviation
+    };
+}
+
 export {
     calculateActivityScore,
+    calculateStabilityDeviationAndAverage
 }
