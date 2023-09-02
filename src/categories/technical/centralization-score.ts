@@ -36,6 +36,9 @@ const getContractTradingContraintCheck = (contract: any) => {
 };
 
 const getTechnicalCentralizationScanningScore = (project: any) => {
+    if (project.contracts == undefined) { // set if not exists for.
+        project.contracts = {};
+    }
     // Powered By GoPlus
     let contractsScores: any = [];
     let contractsChains = Object.keys(project.contracts);
@@ -57,6 +60,9 @@ const getTechnicalCentralizationScanningScore = (project: any) => {
             tradingContraintScoreResult.passedPercentage * 33 / 100
         ].reduce((acc, s) => acc + s, 0);
         contractsScores.push(globalContractScore);
+    }
+    if (contractsScores.length == 0) {
+        return 30; // default.
     }
     const goPlusScore = contractsScores.reduce((acc: any, s: any) => acc + s, 0) / contractsScores.length;
     return goPlusScore;

@@ -1,7 +1,10 @@
 import * as utils from '../../utils';
 
 const getMarketStabilityPriceScore = (project: any) => {
-    if (project.price == undefined || project.prices365 == undefined || Object.keys(project.prices365).length < 2) {
+    if (project.price == undefined
+        || project.prices365 == undefined
+        || Object.keys(project.prices365).length < 2
+        || Object.values(project.prices365).filter(x => x != 0 && x != Infinity).length == 0) {
         return {
             trendActivityScore: 50,
             trend: 'Stable',
@@ -12,7 +15,7 @@ const getMarketStabilityPriceScore = (project: any) => {
         };
     }
     const lastsThirtyDaysKeys = Object.keys(project.prices365).slice(0).slice(-30);
-    const lastsThirtyDaysPrices = lastsThirtyDaysKeys.map(x => project.prices365[x]);
+    const lastsThirtyDaysPrices = lastsThirtyDaysKeys.map(x => project.prices365[x]).filter(x => x != 0 && x != Infinity);
     
     const activityScore = utils.calculateActivityScore(lastsThirtyDaysPrices, 20);
     const stabilityData = utils.calculateStabilityDeviationAndAverage(lastsThirtyDaysPrices);

@@ -33,7 +33,7 @@ const calculateStabilityDeviationAndAverage = (priceList: any[]) => {
     return {
         averagePrice,
         standardDeviation,
-        percentageOfDeviation
+        percentageOfDeviation: percentageOfDeviation > 100 ? 100 : (percentageOfDeviation < 0 ? 0 : percentageOfDeviation)
     };
 }
 

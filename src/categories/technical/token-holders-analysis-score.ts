@@ -31,6 +31,9 @@ const getTopTenHoldersPercentage = (contract: any) => {
 
 
 const getTechnicalTokenHoldersAnalysisScore = (project: any) => {
+    if (project.contracts == undefined) { // set if not exists for.
+        project.contracts = {};
+    }
     // Data Powered By GoPlus
     let contractsDatas: any = [];
     let contractsChains = Object.keys(project.contracts);
